@@ -22,6 +22,8 @@ def main():
         # seed=2           # Fixed seed for debugging (remove for random mazes)
     )
 
+    maze.solve()
+
     # Keep window open until closed
     window.wait_for_close()
 

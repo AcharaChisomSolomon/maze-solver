@@ -73,6 +73,19 @@ class TestMaze(unittest.TestCase):
             # Create a maze without a seed
             maze3 = Maze(0, 0, 3, 3, 10, 10, win)
             mock_seed.assert_not_called()
+                
+    def test_generate_maze_resets_visited(self):
+        """Test that the generate_maze method correctly resets all cells to unvisited after maze generation."""
+        win = MagicMock()
+        maze = Maze(0, 0, 2, 2, 10, 10, win)
+        
+        # Generate the maze
+        maze.generate_maze()
+        
+        # Verify all cells are marked as not visited after maze generation
+        for i in range(2):
+            for j in range(2):
+                self.assertFalse(maze._cells[i][j].visited)
 
 if __name__ == "__main__":
     unittest.main()
