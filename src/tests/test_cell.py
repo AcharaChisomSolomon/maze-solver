@@ -14,6 +14,15 @@ class TestCell(unittest.TestCase):
         self.assertTrue(self.cell.has_top_wall)
         self.assertTrue(self.cell.has_bottom_wall)
 
+    def test_cell_is_not_visited_by_default(self):
+        """Test that a cell is not visited by default."""
+        self.assertFalse(self.cell.visited)
+
+    def test_cell_can_be_marked_as_visited(self):
+        """Test that a cell can be marked as visited."""
+        self.cell.visited = True
+        self.assertTrue(self.cell.visited)
+
     def test_cell_can_be_drawn(self):
         """Test that a cell can be drawn on the window."""
         self.cell.draw(10, 20, 30, 40)

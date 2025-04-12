@@ -12,6 +12,7 @@ class Cell:
         self._y1 = 0
         self._y2 = 0
         self._win = win
+        self.visited = False  # Track if this cell has been visited during maze generation
 
     def draw(self, x1, y1, x2, y2):
         self._x1 = x1

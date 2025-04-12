@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from src.maze import Maze, Cell
 
 class TestMaze(unittest.TestCase):
@@ -50,6 +50,29 @@ class TestMaze(unittest.TestCase):
         # Call animate and verify the window was redrawn
         maze._animate()
         win.redraw.assert_called()
+
+    def test_maze_seed_controls_randomness(self):
+        """Test that providing a seed to the maze controls randomness."""
+        win = MagicMock()
+        
+        # Create two mazes with the same seed
+        with patch('random.seed') as mock_seed:
+            maze1 = Maze(0, 0, 3, 3, 10, 10, win, seed=42)
+            mock_seed.assert_called_once_with(42)
+            
+            # Reset the mock
+            mock_seed.reset_mock()
+            
+            # Create another maze with the same seed
+            maze2 = Maze(0, 0, 3, 3, 10, 10, win, seed=42)
+            mock_seed.assert_called_once_with(42)
+            
+            # Reset the mock
+            mock_seed.reset_mock()
+            
+            # Create a maze without a seed
+            maze3 = Maze(0, 0, 3, 3, 10, 10, win)
+            mock_seed.assert_not_called()
 
 if __name__ == "__main__":
     unittest.main()
